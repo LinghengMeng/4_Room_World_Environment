@@ -3,6 +3,7 @@ This repository provides a simulation of 4-Room-World environment.
 
 ## Create 4-Room-World Scene
    FourRoomScene folder contains files to create a scene using V-REP api.
+   
       * 4room_world_models: V-REP models used to create a scene
       * VrepRemoteApiBindings: V-REP dynamic lib and api-script
       * CSV files: specify position of loaded objects
