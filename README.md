@@ -21,6 +21,6 @@ This repository provides a simulation of 4-Room-World environment.
     
   * V-REP scene created by script: `4_room_world.ttt`
   
-<img src="https://github.com/LinghengMeng/4_Room_World_Environment/blob/master/Images/4Room_Scene.png" width="250" height="250" />       <img src="https://github.com/LinghengMeng/4_Room_World_Environment/blob/master/Images/4Room_scene2.png" width="250" height="250" />     <img src="https://github.com/LinghengMeng/4_Room_World_Environment/blob/master/Images/4Room_Legend.png" width="250" height="250" /> 
+<img src="https://github.com/LinghengMeng/4_Room_World_Environment/blob/master/Images/4Room_Scene.png" width="250" height="250" />       <img src="https://github.com/LinghengMeng/4_Room_World_Environment/blob/master/Images/4Room_scene2.png" width="250" height="250" />     <img src="https://github.com/LinghengMeng/4_Room_World_Environment/blob/master/Images/4Room_Legend.png"  height="250" /> 
 
 ## Virtual Environment
