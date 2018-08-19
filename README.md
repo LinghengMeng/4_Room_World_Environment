@@ -18,5 +18,7 @@ This repository provides a simulation of 4-Room-World environment.
          
   * Script to create a scene:
     `create_4room_world.py`
+    
+  * V-REP scene created by script: `4_room_world.ttt`
 
-## 
+## Virtual Environment
