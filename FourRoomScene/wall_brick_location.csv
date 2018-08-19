@@ -5,11 +5,11 @@ horizontal middle,-2,0,0.5
 horizontal middle,-4,0,0.5
 horizontal middle,-5,0,0.5
 horizontal middle,-6,0,0.5
-horizontal middle,1,0,0.5
-horizontal middle,2,0,0.5
-horizontal middle,4,0,0.5
-horizontal middle,5,0,0.5
-horizontal middle,6,0,0.5
+horizontal middle_right,1,-1,0.5
+horizontal middle_right,2,-1,0.5
+horizontal middle_right,4,-1,0.5
+horizontal middle_right,5,-1,0.5
+horizontal middle_right,6,0,0.5
 vertical middle,0,1,0.5
 vertical middle,0,2,0.5
 vertical middle,0,4,0.5
