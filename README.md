@@ -9,7 +9,7 @@ This repository provides a simulation of 4-Room-World environment.
   * VrepRemoteApiBindings: V-REP dynamic lib and api-script
       
   * CSV files: specify position of loaded objects
-      
+  
          * wall_brick_location.csv
          * floor_tile_location.csv
          * hallway_location.csv
