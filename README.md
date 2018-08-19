@@ -10,11 +10,11 @@ This repository provides a simulation of 4-Room-World environment.
       
   * CSV files: specify position of loaded objects
   
-         * *wall_brick_location.csv*: position of wall brick
-         * floor_tile_location.csv: position of wall floor tile
-         * hallway_location.csv: position of hallway
-         * goal_location.csv: position of goal
-         * standing_participant_location.csv: initial position of standing participant which is static.
+         * "wall_brick_location.csv": position of wall brick
+         * "floor_tile_location.csv": position of wall floor tile
+         * "hallway_location.csv": position of hallway
+         * "goal_location.csv": position of goal
+         * "standing_participant_location.csv": initial position of standing participant which is static.
          
   * Script to create a scene:
     `create_4room_world.py`
