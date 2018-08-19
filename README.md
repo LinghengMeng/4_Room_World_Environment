@@ -16,3 +16,7 @@ This repository provides a simulation of 4-Room-World environment.
          * goal_location.csv: position of goal
          * standing_participant_location.csv: initial position of standing participant which is static.
          
+  * Script to create a scene:
+    `create_4room_world.py`
+
+## 
