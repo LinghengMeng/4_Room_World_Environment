@@ -1,10 +1,10 @@
 # 4_Room_World_Environment
-This repository provides a simulation of 4-Room-World environment based on [V-REP](http://www.coppeliarobotics.com).
+This repository provides a simulation of 4-Room-World environment based on [V-REP](http://www.coppeliarobotics.com), and the virtual environments implemented in this repository share the same interfaces with [OpenAi Gym](https://gym.openai.com).
 
 There are in totall **4 Types of 4-Room-World Environment** with various complexities implemented in this repository. For more detail information on these virtual environments, please refer to [4 Types of 4-Room-World Environment](https://github.com/LinghengMeng/4_Room_World_Environment/blob/master/Environment/README.md).
 
 
-## Create 4-Room-World Scene (Optional)
+## Step 1: Create 4-Room-World Scene (Optional)
 FourRoomScene folder contains files to create a scene using V-REP api(If you do not have V-REP, please download from [V-REP](http://www.coppeliarobotics.com/downloads.html)).
    
   * 4room_world_models: V-REP models used to create a scene
@@ -28,14 +28,21 @@ FourRoomScene folder contains files to create a scene using V-REP api(If you do 
 
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; **Figure 1.** 4Room World Screenshots
 
-## Load Scene to V-REP
+## Step 2: Load Scene to V-REP
+Load scene pre-created `4_room_world.ttt` or created by yourself into V-REP.
 
-## Choose 4-Room-World Virtual Environment
+## Step 3: Choose 4-Room-World Virtual Environment
+For detailed information on these virtual environments, please refer to [4 Types of 4-Room-World Environment](https://github.com/LinghengMeng/4_Room_World_Environment/blob/master/Environment/README.md).
 
   1. FourRoomGridWorld
   2. FourRoomContinuousWorld
   3. FourRoomCameraVisualWorld
   4. FourRoomFirstPersonVisualWorld
 
+### Step 4: Use 4-Room-World Virtual Environment as You Using [OpenAi Gym](https://gym.openai.com)
+Demo scripts on how to use these virtual environments can be found in:
 
-Implemented in `Environment/FourRoomGridWorld.py`
+  1. `interaction_participant_and_4room_grid_world_env.py`
+  2. 
+  3. 
+  4. 
