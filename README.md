@@ -29,7 +29,7 @@ FourRoomScene folder contains files to create a scene using V-REP api(If you do 
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; **Figure 1.** 4Room World Screenshots
 
 ## Step 2: Load Scene to V-REP
-Load scene pre-created `4_room_world.ttt` or created by yourself into V-REP.
+Load scene pre-created `4_room_world.ttt` or scene created by yourself into V-REP.
 
 ## Step 3: Choose 4-Room-World Virtual Environment
 For detailed information on these virtual environments, please refer to [4 Types of 4-Room-World Environment](https://github.com/LinghengMeng/4_Room_World_Environment/blob/master/Environment/README.md).
@@ -46,3 +46,5 @@ Demo scripts on how to use these virtual environments can be found in:
   2. 
   3. 
   4. 
+
+### You are welcom to contribute to this reposity and make it more versatile. :)
