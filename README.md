@@ -1,5 +1,5 @@
 # 4_Room_World_Environment
-This repository provides a simulation of 4-Room-World environment.
+This repository provides a simulation of 4-Room-World environment based on [V-REP](http://www.coppeliarobotics.com).
 
 ## Create 4-Room-World Scene
   FourRoomScene folder contains files to create a scene using V-REP api.
