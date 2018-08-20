@@ -4,8 +4,8 @@ This repository provides a simulation of 4-Room-World environment based on [V-RE
 There are in totall **4 Types of 4-Room-World Environment** with various complexities implemented in this repository. For more detail information on these virtual environments, please refer to [4 Types of 4-Room-World Environment](https://github.com/LinghengMeng/4_Room_World_Environment/blob/master/Environment/README.md).
 
 
-## Create 4-Room-World Scene
-  FourRoomScene folder contains files to create a scene using V-REP api.
+## Create 4-Room-World Scene (Optional)
+FourRoomScene folder contains files to create a scene using V-REP api(If you do not have V-REP, please download from [V-REP](http://www.coppeliarobotics.com/downloads.html)).
    
   * 4room_world_models: V-REP models used to create a scene
       
@@ -28,8 +28,14 @@ There are in totall **4 Types of 4-Room-World Environment** with various complex
 
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; **Figure 1.** 4Room World Screenshots
 
-## Virtual Environment
-### FourRoomGridWorld
+## Load Scene to V-REP
+
+## Choose 4-Room-World Virtual Environment
+
+  1. FourRoomGridWorld
+  2. FourRoomContinuousWorld
+  3. FourRoomCameraVisualWorld
+  4. FourRoomFirstPersonVisualWorld
 
 
 Implemented in `Environment/FourRoomGridWorld.py`
