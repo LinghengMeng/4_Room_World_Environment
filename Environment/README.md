@@ -1,5 +1,5 @@
 # 3 Types of 4-Room-World Environment
-This folder contains in totall **3 Types of 4-Room-World Environment** which are extenstions of discrete 4-Room-Grid World in [Sutton et al., AI1991].
+This folder contains in totall **3 Types of 4-Room-World Environment** which are extenstions of discrete 4-Room-Grid World proposed in [Sutton et al., AI1991].
 
 ## Virtual Environment
 ### FourRoomGridWorld
