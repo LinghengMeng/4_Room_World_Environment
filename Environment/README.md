@@ -8,7 +8,8 @@ FOr 4-Room Grid World, the state and action are discrete value.
 
 Implemented in `Environment/FourRoomGridWorld.py`
 
- &nbsp;  <img src="https://github.com/LinghengMeng/4_Room_World_Environment/blob/master/Images/4Room_axis_Legend.png" width="250" height="250" />  &nbsp; <img src="https://github.com/LinghengMeng/4_Room_World_Environment/blob/master/Images/4Room_Legend.png"  height="250" /> 
+&nbsp; &nbsp;  <img src="https://github.com/LinghengMeng/4_Room_World_Environment/blob/master/Images/4Room_axis_Legend.png" width="250" height="250" /> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <img src="https://github.com/LinghengMeng/4_Room_World_Environment/blob/master/Images/4Room_Legend.png"  height="250" /> 
+
 **Figure 1.** (a) Axis Legend &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; (b) Action Space and Goal Legend
 
 ### 2. FourRoomContinuousWorld
@@ -28,5 +29,5 @@ For 4-Room First Person Visual Worl, the states are sequence of image coming fro
 
 
 
-
+**Reference**
 [Sutton, Richard S., Doina Precup, and Satinder Singh. "Between MDPs and semi-MDPs: A framework for temporal abstraction in reinforcement learning." Artificial intelligence 112, no. 1-2 (1999): 181-211.](https://ac.els-cdn.com/S0004370299000521/1-s2.0-S0004370299000521-main.pdf?_tid=5e385c67-79e7-4e07-af80-d4bb0abbbb93&acdnat=1534771730_5258b8e295835695ebde7f6976d1291d)
