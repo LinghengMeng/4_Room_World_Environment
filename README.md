@@ -23,6 +23,6 @@ This repository provides a simulation of 4-Room-World environment.
   
 <img src="https://github.com/LinghengMeng/4_Room_World_Environment/blob/master/Images/4Room_scene2.png" width="250" height="250" />      <img src="https://github.com/LinghengMeng/4_Room_World_Environment/blob/master/Images/4Room_axis_Legend.png" width="250" height="250" />    <img src="https://github.com/LinghengMeng/4_Room_World_Environment/blob/master/Images/4Room_Legend.png"  height="250" /> 
 
-  (a) 4Room World Screenshot                (b) Axis Legend                      (c) Action Space and Goal Legend
+  (a) 4Room World Screenshot  &nbsp;&nbsp;&nbsp;     (b) Axis Legend &nbsp; &nbsp; &nbsp;    (c) Action Space and Goal Legend
 
 ## Virtual Environment
