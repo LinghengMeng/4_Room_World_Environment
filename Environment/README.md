@@ -8,6 +8,9 @@ FOr 4-Room Grid World, the state and action are discrete value.
 
 Implemented in `Environment/FourRoomGridWorld.py`
 
+ &nbsp;  <img src="https://github.com/LinghengMeng/4_Room_World_Environment/blob/master/Images/4Room_axis_Legend.png" width="250" height="250" />  &nbsp; <img src="https://github.com/LinghengMeng/4_Room_World_Environment/blob/master/Images/4Room_Legend.png"  height="250" /> 
+**Figure 1.** (a) Axis Legend &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; (b) Action Space and Goal Legend
+
 ### 2. FourRoomContinuousWorld
 For 4-Room continuous World, the state and action are continuous value.
 
