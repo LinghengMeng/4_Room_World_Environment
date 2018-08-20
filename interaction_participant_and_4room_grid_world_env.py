@@ -12,9 +12,14 @@ if __name__ == '__main__':
     four_room_grid_world_env = FourRoomGridWorld()
     observation, reward, done, info = four_room_grid_world_env.reset()
     
+    print('Interacting ...')
+    
     while not done:
+        # Random Action
         action = four_room_grid_world_env.action_space.sample()
+        # Interact with environment
         observation, reward, done, info = four_room_grid_world_env.step(action)
-        if done:
-            print('done:'.format(done))
+        
         time.sleep(0.1)
+    
+    print('Interaction done.')

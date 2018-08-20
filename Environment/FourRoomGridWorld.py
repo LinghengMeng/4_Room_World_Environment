@@ -37,7 +37,7 @@ from IPython.core.debugger import Tracer
 class FourRoomGridWorld(gym.Env):
     def __init__(self, IP = '127.0.0.1', Port = 19997):
         """
-        Instantiate LASEnv. LASEnv is the interface between LAS and Environment. Thus, LASEnv is the internal environment of LAS.
+        Instantiate FourRoomGridWorld. 
         
         Parameters
         ----------
@@ -48,7 +48,7 @@ class FourRoomGridWorld(gym.Env):
             Port to communicate with V-REP server.
                 
         """
-        print ('Initialize LASEnv ...')
+        print ('Initialize FourRoomGridWorld ...')
         # ========================================================================= #
         #                      Initialize V-REP related work                        #
         # ========================================================================= # 
@@ -56,9 +56,9 @@ class FourRoomGridWorld(gym.Env):
         vrep.simxFinish(-1) # just in case, close all opened connections
         self.clientID = vrep.simxStart(IP,Port,True,True,5000,5) # Connect to V-REP
         if self.clientID!=-1:
-            print ('LASEnv connected to remote V-REP API server')
+            print ('FourRoomGridWorld connected to remote V-REP API server')
         else:
-            print ('LASEnv failed connecting to remote V-REP API server')
+            print ('FourRoomGridWorld failed connecting to remote V-REP API server')
         
         # Initialize operation mode of communicated command in V-REP
         #   To get sensor data
@@ -111,7 +111,7 @@ class FourRoomGridWorld(gym.Env):
         self.action_dim = 4
         self.action_space = spaces.Discrete(self.action_dim)
         
-        print("Initialization of LAS done!")
+        print("Initialization of FourRoomGridWorld done!")
        
     def step(self, action):
         """
@@ -202,7 +202,6 @@ class FourRoomGridWorld(gym.Env):
             x = self.observation_positions[observation][0]
             y = self.observation_positions[observation][1]
             if x == goal_position[0] and y == goal_position[1]:
-                print('self.observation_handles[observation] in self.goalHandles={}'.format(True))
                 reward = 1.0
                 done = True
                 break
