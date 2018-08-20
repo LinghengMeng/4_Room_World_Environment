@@ -91,6 +91,8 @@ class FourRoomGridWorld(gym.Env):
         self.hallwayPositions = get_object_position(self.hallwayHandles, self.clientID, self._def_op_mode, vrep)
         self.goalPositions = get_object_position(self.goalHandles, self.clientID, self._def_op_mode, vrep)
         self.standingParticipantPositions = get_object_position(self.standingParticipantHandles, self.clientID, self._def_op_mode, vrep)
+        # Save initial position of participant for reset
+        self.initial_standingParticipantPositions = self.standingParticipantPositions
         # ========================================================================= #
         #               Initialize action and observation space                 #
         # ========================================================================= # 
@@ -156,6 +158,7 @@ class FourRoomGridWorld(gym.Env):
         """
         return state of participant by mapping position to index in:
             self.floorTileHandles and self.hallwayHandles
+        
         Returns
         -------
         new_state: int
@@ -176,6 +179,9 @@ class FourRoomGridWorld(gym.Env):
     
     def _reward_function(self, observation):
         """
+        If current state is in goal state, reward = 1.0 and done = True. 
+        Otherwise, reward = 0.0 and done = False.
+        
         Parameters
         ----------
         observation: int
@@ -204,7 +210,7 @@ class FourRoomGridWorld(gym.Env):
         
     def _act(self, action):
         """
-        
+        Take the action in V-REP
         """
         targetPosition, targetOrientation = self._transition_model(action)
         # Move to target position
@@ -273,7 +279,6 @@ class FourRoomGridWorld(gym.Env):
         # Get stochastic action
         stochastic_action = self._stochastic_primitive_action(action)
         
-        
         # Calculate new state
         if stochastic_action == 0:
             # up
@@ -310,6 +315,13 @@ class FourRoomGridWorld(gym.Env):
         done:
         info:
         """
+        # Reset participant position
+        vrep.simxSetObjectPosition(self.clientID, 
+                                   self.standingParticipantHandles[0], 
+                                   -1, 
+                                   self.initial_standingParticipantPositions[0], 
+                                   vrep.simx_opmode_blocking)
+        
         # Get state
         self.observation = self._self_observe()
 
