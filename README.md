@@ -1,6 +1,8 @@
 # 4_Room_World_Environment
 This repository provides a simulation of 4-Room-World environment based on [V-REP](http://www.coppeliarobotics.com).
 
+>The cells of the grid corresponds to the states of the environment of four rooms as shown in **4Room World Screenshot**. From any state the agent can perform one of four actions, *up*, *down*, *left* or *right*, which have a stochastic effect. With probability 2/3, the actions cause the agent to move one cell in the corresponding direction, and with probability 1/3, the agent moves instead in one of the other three directions, each with probability 1/9. In either case, if the movement would take the agent into a wall then the agent remians in the same cell. Rewards are zero on all state transitions except transiting into goal state which has reward one. 
+
 ## Create 4-Room-World Scene
   FourRoomScene folder contains files to create a scene using V-REP api.
    
