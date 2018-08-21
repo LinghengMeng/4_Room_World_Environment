@@ -5,8 +5,6 @@ This folder contains in totall **4 Types of 4-Room-World Environment** which are
 ### 1. FourRoomGridWorld
 In 4-Room Grid World, the state and action are discrete value.
 >The cells of the grid corresponds to the states of the environment of four rooms as shown in **4Room World Screenshot**. From any state the agent can perform one of four actions, **up**, **down**, **left** or **right**, which have a stochastic effect. With probability 2/3, the actions cause the agent to move one cell in the corresponding direction, and with probability 1/3, the agent moves instead in one of the other three directions, each with probability 1/9. In either case, if the movement would take the agent into a wall then the agent remians in the same cell. Rewards are **zero** on all state transitions except transiting into goal state which has reward **one**. 
-
-* Implemented in `Environment/FourRoomGridWorld.py`
 * Observation Space: gym.spaces.Discrete(104)
    * 100 ordinary floor states
    * 4 hallways
@@ -15,6 +13,8 @@ In 4-Room Grid World, the state and action are discrete value.
    * down: 1
    * left: 2
    * right: 3
+* Implemented in `Environment/FourRoomGridWorld.py`
+* Scene: `FourRoomScene/4_room_world.ttt`
 
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  <img src="https://github.com/LinghengMeng/4_Room_World_Environment/blob/master/Images/4Room_axis_Legend.png" width="250" height="250" /> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <img src="https://github.com/LinghengMeng/4_Room_World_Environment/blob/master/Images/4Room_Legend.png"  height="250" /> 
 
@@ -24,13 +24,14 @@ In 4-Room Grid World, the state and action are discrete value.
 
 ### 2. FourRoomContinuousWorld
 In 4-Room continuous World, the state and action are continuous value.
-* Implemented in `Environment/FourRoomGridWorld.py`
 * Observation Space: gym.spaces.Box()
    * x-position: [-1, 1] corresponding to axis [-6, 6] in V-REP scene.
    * y-position: [-1, 1] corresponding to axis [-6, 6] in V-REP scene.
 * Action Space: gym.spaces.BOx()
    * orientation: [-1, 1] corresponding to [- &pi;, &pi;] in V-REP scene.
    * stride: [-1, 1] corresponding to [-1, 1] in V-REP scene.
+* Implemented in `Environment/FourRoomGridWorld.py`
+* Scene: `FourRoomScene/4_room_world.ttt`
 
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  <img src="https://github.com/LinghengMeng/4_Room_World_Environment/blob/master/Images/4Room_Continuous_World_State_Legend.png" width="250"  /> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <img src="https://github.com/LinghengMeng/4_Room_World_Environment/blob/master/Images/4Room_Continuous_World_Action_Legend.png"  height="250" /> 
 
