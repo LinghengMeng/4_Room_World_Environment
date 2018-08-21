@@ -3,10 +3,18 @@ This folder contains in totall **4 Types of 4-Room-World Environment** which are
 
 ## Virtual Environment
 ### 1. FourRoomGridWorld
-FOr 4-Room Grid World, the state and action are discrete value.
+For 4-Room Grid World, the state and action are discrete value.
 >The cells of the grid corresponds to the states of the environment of four rooms as shown in **4Room World Screenshot**. From any state the agent can perform one of four actions, **up**, **down**, **left** or **right**, which have a stochastic effect. With probability 2/3, the actions cause the agent to move one cell in the corresponding direction, and with probability 1/3, the agent moves instead in one of the other three directions, each with probability 1/9. In either case, if the movement would take the agent into a wall then the agent remians in the same cell. Rewards are **zero** on all state transitions except transiting into goal state which has reward **one**. 
 
-Implemented in `Environment/FourRoomGridWorld.py`
+* Implemented in `Environment/FourRoomGridWorld.py`
+* Observation Space: gym.spaces.Discrete(104)
+   * 100 ordinary floor states
+   * 4 hallways
+* Action Space: gym.spaces.Discrete(4)
+   * up: 0
+   * down: 1
+   * left: 2
+   * right: 3
 
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  <img src="https://github.com/LinghengMeng/4_Room_World_Environment/blob/master/Images/4Room_axis_Legend.png" width="250" height="250" /> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <img src="https://github.com/LinghengMeng/4_Room_World_Environment/blob/master/Images/4Room_Legend.png"  height="250" /> 
 
