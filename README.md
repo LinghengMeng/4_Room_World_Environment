@@ -29,22 +29,25 @@ FourRoomScene folder contains files to create a scene using V-REP api(If you do 
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; **Figure 1.** 4Room World Screenshots
 
 ## Step 2: Load Scene to V-REP
-Load scene pre-created `4_room_world.ttt` or scene created by yourself into V-REP.
+Load scene pre-created or scene created by yourself into V-REP.
+* FourRoomGridWorld and FourRoomContinuousWorld: `4_room_world.ttt`
+* FourRoomOverheadVisionWorld: `4_room_overhead_vision_world.ttt`
+* FourRoomFirstPersonVisionWorld: `4_room_first_person_vision_world.ttt`
 
 ## Step 3: Choose 4-Room-World Virtual Environment
 For detailed information on these virtual environments, please refer to [4 Types of 4-Room-World Environment](https://github.com/LinghengMeng/4_Room_World_Environment/blob/master/Environment/README.md).
 
   1. FourRoomGridWorld
   2. FourRoomContinuousWorld
-  3. FourRoomCameraVisualWorld
-  4. FourRoomFirstPersonVisualWorld
+  3. FourRoomOverheadVisionWorld
+  4. FourRoomFirstPersonVisionWorld
 
 ### Step 4: Use 4-Room-World Virtual Environment as You Using [OpenAi Gym](https://gym.openai.com)
 Demo scripts on how to use these virtual environments can be found in:
 
   1. `interaction_participant_and_4room_grid_world_env.py`
-  2. 
+  2. `interaction_participant_and_4room_continuous_world_env.py`
   3. 
   4. 
 
-### You are welcom to contribute to this reposity and make it more versatile. :)
+### You are welcom to contribute to this reposity and make it more versatile :)
