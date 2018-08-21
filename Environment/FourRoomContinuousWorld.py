@@ -206,7 +206,7 @@ class FourRoomContinuousWorld(gym.Env):
             y = observation[1] * 6
             distance_to_goal = math.hypot(x - goal_position[0], y - goal_position[1])
             if  distance_to_goal <= 0.5: # radius of goal region
-                reward = distance_to_goal
+                reward = 1.0
                 done = True
                 break
         return reward, done
