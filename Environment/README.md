@@ -24,8 +24,8 @@ For 4-Room Grid World, the state and action are discrete value.
 For 4-Room continuous World, the state and action are continuous value.
 * Implemented in `Environment/FourRoomGridWorld.py`
 * Observation Space: gym.spaces.Box()
-   * x-position: [-1, 1] corresponding to axis [-5, 5] in V-REP scene.
-   * y-position: [-1, 1] corresponding to axis [-5, 5] in V-REP scene.
+   * x-position: [-1, 1] corresponding to axis [-6, 6] in V-REP scene.
+   * y-position: [-1, 1] corresponding to axis [-6, 6] in V-REP scene.
 * Action Space: gym.spaces.BOx()
    * orientation: [-1, 1] corresponding to [-pi, pi] in V-REP scene.
    * stride: [-1, 1] corresponding to [-1, 1] in V-REP scene.
