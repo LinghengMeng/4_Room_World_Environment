@@ -41,15 +41,23 @@ In 4-Room continuous World, the state and action are continuous value.
 
 ### 3. FourRoomOverheadVisionWorld
 In 4-Room Overhead Vision World, the states are a sequence of images coming from a vision sensor overlooking the whole world.
+* Observation Space: gym.spaces.Box()
+   * Image: 
+* Action Space: gym.spaces.Box()
+   * orientation: [-1, 1] corresponding to [- &pi;, &pi;] in V-REP scene.
+   * stride: [-1, 1] corresponding to [-1, 1] in V-REP scene.
+* Implemented in `Environment/FourRoomOverheadVisionWorld.py`
+* Scene: `4_room_overhead_vision_world.ttt`
 
 ### 4. FourRoomFirstPersonVisionWorld
 In 4-Room First Person Vision World, the states are a sequence of image coming from eye (i.e. a vision sensor attached on participant's head) of participant which can only partially observe the state of the world.
-
-
-
-
-
-
+* Observation Space: gym.spaces.Box()
+   * Image: 
+* Action Space: gym.spaces.Box()
+   * orientation: [-1, 1] corresponding to [- &pi;, &pi;] in V-REP scene.
+   * stride: [-1, 1] corresponding to [-1, 1] in V-REP scene.
+* Implemented in `Environment/FourRoomOverheadVisionWorld.py`
+* Scene: `4_room_first_person_vision_world.ttt`
 
 
 
