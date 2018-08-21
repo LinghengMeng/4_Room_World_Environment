@@ -30,7 +30,7 @@ FourRoomScene folder contains files to create a scene using V-REP api(If you do 
 
 ## Step 2: Load Scene to V-REP
 Load scene pre-created or scene created by yourself into V-REP.
-* FourRoomGridWorld and FourRoomContinuousWorld: `4_room_world.ttt`
+* FourRoomGridWorld &amp; FourRoomContinuousWorld: `4_room_world.ttt`
 * FourRoomOverheadVisionWorld: `4_room_overhead_vision_world.ttt`
 * FourRoomFirstPersonVisionWorld: `4_room_first_person_vision_world.ttt`
 
