@@ -22,6 +22,14 @@ For 4-Room Grid World, the state and action are discrete value.
 
 ### 2. FourRoomContinuousWorld
 For 4-Room continuous World, the state and action are continuous value.
+* Implemented in `Environment/FourRoomGridWorld.py`
+* Observation Space: gym.spaces.Box()
+   * x-position: [-5, 5]
+   * y-position: [-5, 5]
+* Action Space: gym.spaces.BOx()
+   * orientation: [-pi, pi]
+   * stride: [-1, 1]
+
 
 ### 3. FourRoomCameraVisualWorld
 For 4-Room Camera Visual World, the states are sequence of images coming from a camera overlooking the whole world.
