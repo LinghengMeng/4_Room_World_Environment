@@ -3,7 +3,7 @@ This folder contains in totall **4 Types of 4-Room-World Environment** which are
 
 ## Virtual Environment
 ### 1. FourRoomGridWorld
-For 4-Room Grid World, the state and action are discrete value.
+In 4-Room Grid World, the state and action are discrete value.
 >The cells of the grid corresponds to the states of the environment of four rooms as shown in **4Room World Screenshot**. From any state the agent can perform one of four actions, **up**, **down**, **left** or **right**, which have a stochastic effect. With probability 2/3, the actions cause the agent to move one cell in the corresponding direction, and with probability 1/3, the agent moves instead in one of the other three directions, each with probability 1/9. In either case, if the movement would take the agent into a wall then the agent remians in the same cell. Rewards are **zero** on all state transitions except transiting into goal state which has reward **one**. 
 
 * Implemented in `Environment/FourRoomGridWorld.py`
@@ -23,7 +23,7 @@ For 4-Room Grid World, the state and action are discrete value.
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; **Figure 1. 4-Room Grid World**
 
 ### 2. FourRoomContinuousWorld
-For 4-Room continuous World, the state and action are continuous value.
+In 4-Room continuous World, the state and action are continuous value.
 * Implemented in `Environment/FourRoomGridWorld.py`
 * Observation Space: gym.spaces.Box()
    * x-position: [-1, 1] corresponding to axis [-6, 6] in V-REP scene.
@@ -38,11 +38,11 @@ For 4-Room continuous World, the state and action are continuous value.
 
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; **Figure 2. 4-Room Continuous World**
 
-### 3. FourRoomCameraVisualWorld
-For 4-Room Camera Visual World, the states are sequence of images coming from a camera overlooking the whole world.
+### 3. FourRoomOverheadVisionWorld
+In 4-Room Overhead Vision World, the states are a sequence of images coming from a vision sensor overlooking the whole world.
 
-### 4. FourRoomFirstPersonVisualWorld
-For 4-Room First Person Visual Worl, the states are sequence of image coming from eyes of participant which can only partially observe the state of the world.
+### 4. FourRoomFirstPersonVisionWorld
+In 4-Room First Person Vision World, the states are a sequence of image coming from eye (i.e. a vision sensor attached on participant's head) of participant which can only partially observe the state of the world.
 
 
 
