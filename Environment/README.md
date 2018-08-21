@@ -13,6 +13,9 @@ In 4-Room Grid World, the state and action are discrete value.
    * down: 1
    * left: 2
    * right: 3
+* Reward: 
+   * 1: in goal state
+   * 0: in other states
 * Implemented in `Environment/FourRoomGridWorld.py`
 * Scene: `FourRoomScene/4_room_world.ttt`
 
@@ -30,6 +33,9 @@ In 4-Room continuous World, the state and action are continuous value.
 * Action Space: gym.spaces.BOx()
    * orientation: [-1, 1] corresponding to [- &pi;, &pi;] in V-REP scene.
    * stride: [-1, 1] corresponding to [-1, 1] in V-REP scene.
+* Reward: 
+   * 1: in goal region
+   * 0: in other positions
 * Implemented in `Environment/FourRoomGridWorld.py`
 * Scene: `FourRoomScene/4_room_world.ttt`
 
