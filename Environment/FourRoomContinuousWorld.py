@@ -28,19 +28,13 @@ except:
 import gym
 from gym import spaces
 import numpy as np
-import numpy.matlib as matlib
-import random
 import math
 import warnings
 
 import time
 
-from collections import deque
-import re
-
 from .UtilitiesForEnv import get_all_object_name_and_handle, get_object_position
 
-from IPython.core.debugger import Tracer
 
 class FourRoomContinuousWorld(gym.Env):
     def __init__(self, IP = '127.0.0.1', Port = 19997):
@@ -67,22 +61,6 @@ class FourRoomContinuousWorld(gym.Env):
             print ('FourRoomGridWorld connected to remote V-REP API server')
         else:
             print ('FourRoomGridWorld failed connecting to remote V-REP API server')
-        
-        # Initialize operation mode of communicated command in V-REP
-        #   To get sensor data
-        #     vrep.simx_opmode_buffer:   does not work, don't know why?
-        #     vrep.simx_opmode_blocking: too slow
-        #     vrep.simx_opmode_oneshot:  works pretty good
-        self._def_op_mode = vrep.simx_opmode_blocking
-        
-        self._set_joint_op_mode = vrep.simx_opmode_oneshot
-        self._set_light_op_mode = vrep.simx_opmode_oneshot
-        self._set_visitor_op_mode = vrep.simx_opmode_oneshot
-
-        self._get_prox_op_mode = vrep.simx_opmode_oneshot 
-        self._get_light_op_mode = vrep.simx_opmode_oneshot
-        
-        
         # Start simulating in V-REP
         vrep.simxStartSimulation(self.clientID, vrep.simx_opmode_blocking)
         # ========================================================================= #
@@ -92,13 +70,13 @@ class FourRoomContinuousWorld(gym.Env):
         self.floorTileHandles, self.floorTileNames, \
         self.hallwayHandles, self.hallwayNames, \
         self.goalHandles, self.goalNames,\
-        self.standingParticipantHandles, self.standingParticipantNames = get_all_object_name_and_handle(self.clientID, self._def_op_mode, vrep)
+        self.standingParticipantHandles, self.standingParticipantNames = get_all_object_name_and_handle(self.clientID, vrep.simx_opmode_blocking, vrep)
         
-        self.wallBrickPositions = get_object_position(self.wallBrickHandles, self.clientID, self._def_op_mode, vrep)
-        self.floorTilePositions = get_object_position(self.floorTileHandles, self.clientID, self._def_op_mode, vrep)
-        self.hallwayPositions = get_object_position(self.hallwayHandles, self.clientID, self._def_op_mode, vrep)
-        self.goalPositions = get_object_position(self.goalHandles, self.clientID, self._def_op_mode, vrep)
-        self.standingParticipantPositions = get_object_position(self.standingParticipantHandles, self.clientID, self._def_op_mode, vrep)
+        self.wallBrickPositions = get_object_position(self.wallBrickHandles, self.clientID, vrep.simx_opmode_blocking, vrep)
+        self.floorTilePositions = get_object_position(self.floorTileHandles, self.clientID, vrep.simx_opmode_blocking, vrep)
+        self.hallwayPositions = get_object_position(self.hallwayHandles, self.clientID, vrep.simx_opmode_blocking, vrep)
+        self.goalPositions = get_object_position(self.goalHandles, self.clientID, vrep.simx_opmode_blocking, vrep)
+        self.standingParticipantPositions = get_object_position(self.standingParticipantHandles, self.clientID, vrep.simx_opmode_blocking, vrep)
         # Save initial position of participant for reset
         self.initial_standingParticipantPositions = self.standingParticipantPositions
         # ========================================================================= #
@@ -114,7 +92,7 @@ class FourRoomContinuousWorld(gym.Env):
         self.observation_space = spaces.Box(low = obs_low, high = obs_high)
         # Continuous Action:
         #   Orientation: [-1, 1] mapped from [-Pi, Pi]
-        #   Stride: [-1, 1]
+        #   Stride: [-1, 1] mapped from [0, 1]
         self.act_dim = 2
         act_low = np.array([-1]*self.act_dim)
         act_high = np.array([1]*self.act_dim)
@@ -128,16 +106,17 @@ class FourRoomContinuousWorld(gym.Env):
         
         Parameters
         ----------
-        action: int
+        action: float [orientation, stride]
+            in [-1, 1]
         
         Returns
         -------
-        observation: int
-            obervation of environment after taking an action
+        observation: float [x, y]
+            in [-1, 1]
         reward: float
             reward after taking an action
         done: bool
-            whether simulation is done or not.
+            whether reached goal region.
         info:
             some information for debugging
         """
@@ -145,93 +124,30 @@ class FourRoomContinuousWorld(gym.Env):
         # rather than throw an exception.
         if np.sum(np.isnan(action)) != 0:
             raise ValueError("Find nan value in action!")
+        # Clip action to avoid improer action command
+        action = np.clip(action, self.action_space.low, self.action_space.high)
         # Check action to avoid improer action command
         if not self.action_space.contains(action):
             raise ValueError('action value: {} is not in action_space'.format(action))
+        
         # Taking action
         self._act(action)
-
         # Set a small sleep time to avoid getting nan sensor data
         time.sleep(0.01)
-
         # Observe current state
-        self.observation = self._self_observe()
-
+        observation = self._self_observe()
         # Calculate reward
-        self.reward, done = self._reward_function(self.observation)
-        
+        reward, done = self._reward_function(observation)
         info = []
-        return self.observation, self.reward, done, info 
-
-    def _self_observe(self):
-        """
-        return state of participant by mapping position to index in:
-            self.floorTileHandles and self.hallwayHandles
-        
-        Returns
-        -------
-        new_state: [x, y]
-            x and y in range [-1, 1]
-        """
-        # Get participant position
-        standingParticipantPositions = get_object_position(self.standingParticipantHandles, 
-                                                           self.clientID, 
-                                                           self._def_op_mode, vrep)
-        new_state = self._map_position_to_observation(standingParticipantPositions[0])
-            
-        return new_state
-    
-    def _reward_function(self, observation):
-        """
-        If current state is in goal state, reward = 1.0 and done = True. 
-        Otherwise, reward = 0.0 and done = False.
-        
-        Parameters
-        ----------
-        observation: [x, y]
-            x and y in range [-1, 1]
-        
-        Returns
-        -------
-        reward: float
-        
-        done: bool
-            if current state is in goal state, done = True. Otherwise, done = False
-        """
-        # Check if observation is goal
-        reward = 0.0
-        done = False
-        for goal_position in self.goalPositions:
-            x = observation[0] * 6
-            y = observation[1] * 6
-            distance_to_goal = math.hypot(x - goal_position[0], y - goal_position[1])
-            if  distance_to_goal <= 0.5: # radius of goal region
-                reward = 1.0
-                done = True
-                break
-        return reward, done
-    
-    def _map_action(self, action):
-        """
-        Map orientation in action to [-Pi, Pi]
-        """
-        action[0] = action[0] * math.pi
-        return action
-    
-    def _map_position_to_observation(self, position):
-        """
-        Map x and y axis to [-1, 1]
-        """
-        x = position[0]/6.0
-        y = position[1]/6.0
-        observation = [x, y]
-        return observation
+        return observation, reward, done, info 
     
     def _act(self, action):
         """
-        Take the action in V-REP
+        Take the action in V-REP.
         """
+        # Map action value from [-1, 1] to [-Pi, Pi] and [0, 1]
         action = self._map_action(action)
+        # Calculate target position and orientation
         targetPosition, targetOrientation = self._transition_model(action)
         # Move to target position
         vrep.simxSetObjectPosition(self.clientID, 
@@ -246,53 +162,146 @@ class FourRoomContinuousWorld(gym.Env):
                                       targetOrientation, 
                                       vrep.simx_opmode_blocking)
 
-
-    def _transition_model(self, action):
+    def _self_observe(self):
         """
-        Return the target position of participant after taking action.
-        delta_x = stride * cos(orientation)
-        delta_y = stride * sin(orientation)
-        
-        Parameters
-        ----------
-        action: [orientation, stride]
+        return state of participant by mapping position to index in:
+            self.floorTileHandles and self.hallwayHandles
         
         Returns
         -------
-        targetPosition: [x, y, z]
-        targetOrientation: 
-            0. up: [0,0,90]
-            1. down: [0,0,-90]
-            2. left: [0,0,180]
-            3. right: [0,0,0]
+        new_state: [x, y]
+            x and y in range [-1, 1]
         """
         # Get participant position
         standingParticipantPositions = get_object_position(self.standingParticipantHandles, 
                                                            self.clientID, 
-                                                           self._def_op_mode, vrep)
+                                                           vrep.simx_opmode_blocking, vrep)
+        # Mapping [x, y, z] to [x, y] with range [-1, 1]
+        new_state = self._map_position_to_observation(standingParticipantPositions[0])
+        return new_state
+    
+    def _reward_function(self, observation):
+        """
+        If current state is in goal region(a circle with radius=0.5), 
+        reward = 1.0 and done = True. Otherwise, reward = 0.0 and done = False.
+        
+        Parameters
+        ----------
+        observation: [x, y]
+            x and y in range [-1, 1]
+        
+        Returns
+        -------
+        reward: float
+        
+        done: bool
+            If current state is in goal region, done = True. Otherwise, done = False
+        """
+        # Check if observation is in goal region
+        reward = 0.0
+        done = False
+        for goal_position in self.goalPositions:
+            x = observation[0] * 6
+            y = observation[1] * 6
+            distance_to_goal = math.hypot(x - goal_position[0], y - goal_position[1])
+            if  distance_to_goal <= 0.5: # radius of goal region
+                reward = 1.0
+                done = True
+                break
+        return reward, done
+    
+    def reset(self):
+        """
+        Returns
+        -------
+        obseravtion: [x, y]
+            in range [-1, 1]
+        """
+        # Reset participant position
+        vrep.simxSetObjectPosition(self.clientID, 
+                                   self.standingParticipantHandles[0], 
+                                   -1, 
+                                   self.initial_standingParticipantPositions[0], 
+                                   vrep.simx_opmode_blocking)
+        # Get state
+        self.observation = self._self_observe()
+        return self.observation 
+    ###########################################################################
+    #                   self._act(action)  (Auxiliary Functions)              #
+    ###########################################################################
+    def _map_action(self, action):
+        """
+        Map orientation in action from [-1, 1] to [-Pi, Pi], and stride from
+        [-1, 1] to [0, 1]
+        
+        Parameters
+        ----------
+        action: [orientation, stride]
+            orientation in [-1, 1] & stride in [-1, 1]
+            
+        Returns
+        -------
+        action: [orientation, stride]
+            orientation in [-Pi, Pi] & stride in [0, 1]
+        """
+        action[0] = action[0] * math.pi
+        action[1] = (action[1] + 1) / 2.0
+        return action
+    
+    def _transition_model(self, action):
+        """
+        Return the target position and orientation of participant after taking
+        action.
+        
+        Parameters
+        ----------
+        action: [orientation, stride]
+            orientation in [-Pi, Pi] & stride in [0, 1]
+            
+        Returns
+        -------
+        targetPosition: [x, y, z]
+        
+        targetOrientation: float
+            in range [-Pi, Pi]
+        """
+        # Get participant position
+        standingParticipantPositions = get_object_position(self.standingParticipantHandles, 
+                                                           self.clientID, 
+                                                           vrep.simx_opmode_blocking, vrep)
         # standingParticipantPositions only has one participant
         x = standingParticipantPositions[0][0]
         y = standingParticipantPositions[0][1]
         z = standingParticipantPositions[0][2]
-        # new state
+        # new position
         orientation = action[0]
         stride = action[1]
-        
         new_x = x + stride * math.cos(orientation)
         new_y = y + stride * math.sin(orientation)
         newPosition = [new_x, new_y, z]
+        # Check if confict with wall
         if self._check_conflict(newPosition) == True:
             targetPosition = standingParticipantPositions[0]
             targetOrientation = [0, 0, orientation]
         else:
             targetPosition = newPosition
             targetOrientation = [0, 0, orientation]
-        
         return targetPosition, targetOrientation
-
+    
     def _check_conflict(self, newPosition):
         """
         Check if newPosition conflicts with wall-bricks.
+        
+        Parameters
+        ----------
+        newPosition: [x, y, z]
+            in range [-6, 6]
+            
+        Returns
+        -------
+        conflict_flag: bool
+            If conflict with any wall-brick, return True.
+            Otherwise, return false.
         """
         # Check conflict between Participant and Wall Brick
         # Wall Brick border: 
@@ -315,28 +324,22 @@ class FourRoomContinuousWorld(gym.Env):
                 conflict_flag = True
                 break
         return conflict_flag
-                
-    def reset(self):
+    ###########################################################################
+    #                   self._self_observe()  (Auxiliary Functions)           #
+    ###########################################################################
+    def _map_position_to_observation(self, position):
         """
+        Map x and y axis to [-1, 1], and discard z.
+        
+        Paramters
+        ---------
+        position: [x, y, z]
+        
         Returns
         -------
-        obseravtion:
-        rward:
-        done:
-        info:
+        observation: [x, y]
         """
-        # Reset participant position
-        vrep.simxSetObjectPosition(self.clientID, 
-                                   self.standingParticipantHandles[0], 
-                                   -1, 
-                                   self.initial_standingParticipantPositions[0], 
-                                   vrep.simx_opmode_blocking)
-        
-        # Get state
-        self.observation = self._self_observe()
-
-        # Calculate reward
-        self.reward, done = self._reward_function(self.observation)
-        
-        info = []
-        return self.observation, self.reward, done, info 
+        x = position[0]/6.0
+        y = position[1]/6.0
+        observation = [x, y]
+        return observation
