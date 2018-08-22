@@ -20,19 +20,14 @@ except:
 import gym
 from gym import spaces
 import numpy as np
-import numpy.matlib as matlib
 import random
 import math
 import warnings
 
 import time
 
-from collections import deque
-import re
-
 from .UtilitiesForEnv import get_all_object_name_and_handle, get_object_position
 
-from IPython.core.debugger import Tracer
 
 class FourRoomGridWorld(gym.Env):
     def __init__(self, IP = '127.0.0.1', Port = 19997):
@@ -66,14 +61,6 @@ class FourRoomGridWorld(gym.Env):
         #     vrep.simx_opmode_blocking: too slow
         #     vrep.simx_opmode_oneshot:  works pretty good
         self._def_op_mode = vrep.simx_opmode_blocking
-        
-        self._set_joint_op_mode = vrep.simx_opmode_oneshot
-        self._set_light_op_mode = vrep.simx_opmode_oneshot
-        self._set_visitor_op_mode = vrep.simx_opmode_oneshot
-
-        self._get_prox_op_mode = vrep.simx_opmode_oneshot 
-        self._get_light_op_mode = vrep.simx_opmode_oneshot
-        
         
         # Start simulating in V-REP
         vrep.simxStartSimulation(self.clientID, vrep.simx_opmode_blocking)
@@ -309,10 +296,8 @@ class FourRoomGridWorld(gym.Env):
         """
         Returns
         -------
-        obseravtion:
-        rward:
-        done:
-        info:
+        obseravtion: int
+            one of 104 valid states
         """
         # Reset participant position
         vrep.simxSetObjectPosition(self.clientID, 
@@ -323,9 +308,4 @@ class FourRoomGridWorld(gym.Env):
         
         # Get state
         self.observation = self._self_observe()
-
-        # Calculate reward
-        self.reward, done = self._reward_function(self.observation)
-        
-        info = []
-        return self.observation, self.reward, done, info 
+        return self.observation
