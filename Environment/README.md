@@ -32,7 +32,7 @@ In 4-Room continuous World, the state and action are continuous value.
    * y-position: [-1, 1] corresponding to axis [-6, 6] in V-REP scene.
 * Action Space: gym.spaces.BOx()
    * orientation: [-1, 1] corresponding to [- &pi;, &pi;] in V-REP scene.
-   * stride: [-1, 1] corresponding to [-1, 1] in V-REP scene.
+   * stride: [-1, 1] corresponding to [0, 1] in V-REP scene.
 * Reward: 
    * 1: in goal region
    * 0: in other positions
@@ -51,7 +51,7 @@ In 4-Room Overhead Vision World, the states are a sequence of images coming from
    * Image: 
 * Action Space: gym.spaces.Box()
    * orientation: [-1, 1] corresponding to [- &pi;, &pi;] in V-REP scene.
-   * stride: [-1, 1] corresponding to [-1, 1] in V-REP scene.
+   * stride: [-1, 1] corresponding to [0, 1] in V-REP scene.
 * Implemented in `Environment/FourRoomOverheadVisionWorld.py`
 * Scene: `4_room_overhead_vision_world.ttt`
 
@@ -61,7 +61,7 @@ In 4-Room First Person Vision World, the states are a sequence of image coming f
    * Image: 
 * Action Space: gym.spaces.Box()
    * orientation: [-1, 1] corresponding to [- &pi;, &pi;] in V-REP scene.
-   * stride: [-1, 1] corresponding to [-1, 1] in V-REP scene.
+   * stride: [-1, 1] corresponding to [0, 1] in V-REP scene.
 * Implemented in `Environment/FourRoomOverheadVisionWorld.py`
 * Scene: `4_room_first_person_vision_world.ttt`
 
